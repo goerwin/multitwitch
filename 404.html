@@ -12,7 +12,9 @@
 <body>
   <script type="text/javascript">
     (function init() {
-      const streamNames = window.location.pathname.split('/').slice(1);
+      const streamNames = window.location.pathname.split('/')
+        .filter(name => name !== '' && name !== 'multitwitch');
+
       const numberOfStreams = streamNames.length;
       const bodyEl = document.getElementsByTagName('body')[0];
 
