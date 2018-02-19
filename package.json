@@ -1,0 +1,36 @@
+{
+  "name": "multitwitch",
+  "version": "0.0.1",
+  "description": "Watch multiple Twitch tv streams.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "clean": "rm -rf dist",
+    "build": "npm run clean && webpack --config webpack.config.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/erwingo/multitwitch.git"
+  },
+  "author": "Erwin Gaitan O <erwingaitano@gmail.com>",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/erwingo/multitwitch/issues"
+  },
+  "homepage": "https://github.com/erwingo/multitwitch#readme",
+  "devDependencies": {
+    "css-loader": "^0.28.9",
+    "extract-text-webpack-plugin": "^3.0.2",
+    "file-loader": "^1.1.6",
+    "html-webpack-inline-source-plugin": "0.0.9",
+    "html-webpack-plugin": "^2.30.1",
+    "node-sass": "^4.7.2",
+    "pug": "^2.0.0-rc.4",
+    "pug-loader": "^2.3.0",
+    "sass-loader": "^6.0.6",
+    "ts-loader": "^3.5.0",
+    "typescript": "^2.7.2",
+    "webfonts-loader": "^4.0.1",
+    "webpack": "^3.11.0"
+  }
+}
