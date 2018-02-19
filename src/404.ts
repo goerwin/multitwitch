@@ -38,17 +38,21 @@ function getGrid(numberOfBoxes: number, dimensions: { w: number, h: number }) {
   const containers = [];
 
   for (let i = 0; i < numberOfBoxes; i++) {
+    const playerContainerHeight = containerWidth * 9 / 16;
+    const containerHeight = h;
+
     const container = {
       width: containerWidth,
-      height: h,
+      height: containerHeight,
       left: containerWidth * i,
-      chatContainer: {
-        width: containerWidth,
-        top: containerWidth  * 9 / 16,
-      },
       playerContainer: {
         width: containerWidth,
-        height: containerWidth  * 9 / 16
+        height: playerContainerHeight
+      },
+      chatContainer: {
+        width: containerWidth,
+        top: playerContainerHeight,
+        height: containerHeight - playerContainerHeight
       }
     };
 
@@ -70,17 +74,18 @@ function setStreamSizes(grid: any[], streams: any[]) {
     stream.playerContainer.style.width = grid.playerContainer.width + 'px';
     stream.playerContainer.style.height = grid.playerContainer.height + 'px';
 
+    stream.chatContainer.style.height = grid.chatContainer.height + 'px';
     stream.chatContainer.style.width = grid.chatContainer.width + 'px';
-    stream.chatContainer.style.top = grid.chatContainer.height + 'px';
+    stream.chatContainer.style.top = grid.chatContainer.top + 'px';
   });
 }
 
-window.onresize = () => {
+function setGrid() {
   const grid = getGrid(numberOfStreams, { w: window.innerWidth, h: window.innerHeight });
   setStreamSizes(grid, streams);
-};
+}
 
-const grid = getGrid(numberOfStreams, { w: window.innerWidth, h: window.innerHeight });
-setStreamSizes(grid, streams);
+window.onresize = setGrid;
+setGrid();
 
 document.title = `MultiTwitch - ${streamNames.join(' - ')}`;
