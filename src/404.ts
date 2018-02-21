@@ -1,7 +1,9 @@
 import './404.scss';
 
-const streamNames = window.location.pathname.split('/')
-  .filter(name => name !== '' && name !== 'multitwitch');
+const pathname = window.location.pathname;
+const divider = 'multitwitch';
+const streamNames = pathname.substring(pathname.indexOf(divider) + divider.length).split('/')
+  .filter(el => el !== '')
 
 const numberOfStreams = streamNames.length;
 const bodyEl = document.getElementsByTagName('body')[0];
@@ -13,15 +15,17 @@ const streams = streamNames.map(stream => {
   const playerContainer = document.createElement('div');
   playerContainer.style.position = 'absolute';
 
-  const player = document.createElement('object');
-  player.data = `https://player.twitch.tv/?channel=${stream}`;
+  const player = document.createElement('iframe');
+  player.src = `https://player.twitch.tv/?channel=${stream}`;
+  player.allowFullscreen = true;
 
   const chatContainer = document.createElement('div');
   chatContainer.style.position = 'absolute';
   chatContainer.style.bottom = '0';
 
-  const chat = document.createElement('object');
-  chat.data = `https://www.twitch.tv/${stream}/chat?popout=`;
+  const chat = document.createElement('iframe');
+  chat.src = `https://www.twitch.tv/${stream}/chat?popout=`;
+  chat.allowFullscreen = true;
 
   chatContainer.appendChild(chat);
   playerContainer.appendChild(player);
