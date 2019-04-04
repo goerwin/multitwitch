@@ -32,6 +32,7 @@
     "sass-loader": "^7.1.0",
     "ts-loader": "^5.3.3",
     "typescript": "^3.4.1",
+    "url-loader": "^1.1.2",
     "webfonts-loader": "^4.4.0",
     "webpack": "^4.29.6",
     "webpack-cli": "^3.3.0"

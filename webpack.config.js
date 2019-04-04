@@ -50,7 +50,7 @@ module.exports = {
         test: /\.(png|jpg|svg)$/,
         include: getAbsPath('src'),
         use: {
-          loader: 'file-loader',
+          loader: 'url-loader',
           options: {
             name: '[name].[hash].[ext]'
           }
