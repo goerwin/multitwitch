@@ -24,7 +24,7 @@ const streams = streamNames.map(stream => {
   chatContainer.style.bottom = '0';
 
   const chat = document.createElement('iframe');
-  chat.src = `https://www.twitch.tv/${stream}/chat?popout=`;
+  chat.src = `https://www.twitch.tv/embed/${stream}/chat`;
   chat.allowFullscreen = true;
 
   chatContainer.appendChild(chat);
