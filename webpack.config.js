@@ -10,6 +10,7 @@ const getAbsPath = pathStr => path.resolve(__dirname, pathStr)
 module.exports = {
   mode: 'production',
   entry: {
+    index: getAbsPath('src/index.ts'),
     404: getAbsPath('src/404.ts')
   },
   output: {
@@ -86,7 +87,15 @@ module.exports = {
       inject: 'body',
       template: getAbsPath('src/404.pug'),
       inlineSource: '\.(js|css)$',
+      chunks: ['404'],
       filename: '404.html'
+    }),
+    new HtmlWebpackPlugin({
+      inject: 'body',
+      template: getAbsPath('src/index.pug'),
+      inlineSource: '\.(js|css)$',
+      chunks: ['index'],
+      filename: 'index.html'
     }),
     new HtmlWebpackInlineSourcePlugin()
   ],
