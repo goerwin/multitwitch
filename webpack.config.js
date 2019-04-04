@@ -1,12 +1,14 @@
 const path = require('path');
 
 const ExtractTextPlugin = require('extract-text-webpack-plugin');
+const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const HtmlWebpackInlineSourcePlugin = require('html-webpack-inline-source-plugin');
 
 const getAbsPath = pathStr => path.resolve(__dirname, pathStr)
 
 module.exports = {
+  mode: 'production',
   entry: {
     404: getAbsPath('src/404.ts')
   },
@@ -39,9 +41,7 @@ module.exports = {
       {
         test: /\.s?css$/,
         include: getAbsPath('src'),
-        use: ExtractTextPlugin.extract({
-          use: ['css-loader', 'sass-loader']
-        })
+        use: [MiniCssExtractPlugin.loader, 'css-loader', 'sass-loader']
       },
 
       // IMAGES
@@ -81,7 +81,7 @@ module.exports = {
 
   plugins: [
     // contentash is the file's checksum, useful for caching purposes
-    new ExtractTextPlugin('[name].[contenthash].css'),
+    new MiniCssExtractPlugin('[name].[contenthash].css'),
     new HtmlWebpackPlugin({
       inject: 'body',
       template: getAbsPath('src/404.pug'),
