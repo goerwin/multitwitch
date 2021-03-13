@@ -2,7 +2,7 @@
 
 Watch multiple Twitch tv streams.
 
-Example: https://erwingo.github.io/multitwitch/stream1/stream2
+Example: https://goerwin.github.io/multitwitch/stream1/stream2
 
 ## TODO
 
