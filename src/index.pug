@@ -1,14 +1,19 @@
 html
   head
-    link(href=require('./_media/favicon.png'), rel='shortcut icon')
+    link(href=require('./_media/favicon.png').default, rel='shortcut icon')
     title MultiTwitch
+    each cssFile in htmlWebpackPlugin.files.css
+      style !{compilation.assets[cssFile.substr(htmlWebpackPlugin.files.publicPath.length)].source()}
   body
     .container
       h1.container__title How to use:
-      p.container__el http://erwingo.tk/multitwitch/{stream1}/{stream2}/{stream3}/...
+      p.container__el http://goerwin.github.io/multitwitch/{stream1}/{stream2}/{stream3}/...
       h1.container__title Example:
-      a.container__link(href='http://erwingo.tk/multitwitch/stream1/stream2')
-          | http://erwingo.tk/multitwitch/stream1/stream2
+      a.container__link(href='http://goerwin.github.io/multitwitch/stream1/stream2')
+          | http://goerwin.github.io/multitwitch/stream1/stream2
       h1.container__title Github Project:
-      a.container__link(href='https://github.com/erwingo/multitwitch')
-        img.container__link__img(src=require('./_media/github.svg'))
+      a.container__link(href='https://github.com/goerwin/multitwitch')
+        img.container__link__img(src=require('./_media/github.svg').default)
+
+    each jsFile in htmlWebpackPlugin.files.js
+      script !{compilation.assets[jsFile.substr(htmlWebpackPlugin.files.publicPath.length)].source()}

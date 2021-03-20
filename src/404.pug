@@ -1,5 +1,9 @@
 html
   head
-    link(href=require('./_media/favicon.png'), rel='shortcut icon')
+    link(href=require('./_media/favicon.png').default, rel='shortcut icon')
     title MultiTwitch
+    each cssFile in htmlWebpackPlugin.files.css
+      style !{compilation.assets[cssFile.substr(htmlWebpackPlugin.files.publicPath.length)].source()}
   body
+    each jsFile in htmlWebpackPlugin.files.js
+      script !{compilation.assets[jsFile.substr(htmlWebpackPlugin.files.publicPath.length)].source()}
