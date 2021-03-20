@@ -1,14 +1,16 @@
-import './404.scss';
+import './404.css';
 
 const pathname = window.location.pathname;
 const divider = 'multitwitch';
-const streamNames = pathname.substring(pathname.indexOf(divider) + divider.length).split('/')
-  .filter(el => el !== '')
+const streamNames = pathname
+  .substring(pathname.indexOf(divider) + divider.length)
+  .split('/')
+  .filter((el) => el !== '');
 
 const numberOfStreams = streamNames.length;
 const bodyEl = document.getElementsByTagName('body')[0];
 
-const streams = streamNames.map(stream => {
+const streams = streamNames.map((stream) => {
   const container = document.createElement('div');
   container.style.position = 'absolute';
 
@@ -16,7 +18,7 @@ const streams = streamNames.map(stream => {
   playerContainer.style.position = 'absolute';
 
   const player = document.createElement('iframe');
-  player.src = `https://player.twitch.tv/?channel=${stream}`;
+  player.src = `https://playerrr.twitch.tv/?channel=${stream}&parent=${window.location.host}`;
   player.allowFullscreen = true;
 
   const chatContainer = document.createElement('div');
@@ -24,7 +26,7 @@ const streams = streamNames.map(stream => {
   chatContainer.style.bottom = '0';
 
   const chat = document.createElement('iframe');
-  chat.src = `https://www.twitch.tv/embed/${stream}/chat?darkpopout`;
+  chat.src = `https://www.twitch.tv/embed/${stream}/chat?darkpopout&parent=${window.location.host}`;
   chat.allowFullscreen = true;
 
   chatContainer.appendChild(chat);
@@ -36,13 +38,13 @@ const streams = streamNames.map(stream => {
   return { container, playerContainer, chatContainer };
 });
 
-function getGrid(numberOfBoxes: number, dimensions: { w: number, h: number }) {
+function getGrid(numberOfBoxes: number, dimensions: { w: number; h: number }) {
   const { w, h } = dimensions;
   const containerWidth = w / numberOfBoxes;
   const containers = [];
 
   for (let i = 0; i < numberOfBoxes; i++) {
-    const playerContainerHeight = containerWidth * 9 / 16;
+    const playerContainerHeight = (containerWidth * 9) / 16;
     const containerHeight = h;
 
     const container = {
@@ -51,13 +53,13 @@ function getGrid(numberOfBoxes: number, dimensions: { w: number, h: number }) {
       left: containerWidth * i,
       playerContainer: {
         width: containerWidth,
-        height: playerContainerHeight
+        height: playerContainerHeight,
       },
       chatContainer: {
         width: containerWidth,
         top: playerContainerHeight,
-        height: containerHeight - playerContainerHeight
-      }
+        height: containerHeight - playerContainerHeight,
+      },
     };
 
     containers[i] = container;
@@ -67,7 +69,9 @@ function getGrid(numberOfBoxes: number, dimensions: { w: number, h: number }) {
 }
 
 function setStreamSizes(grid: any[], streams: any[]) {
-  if (grid.length !== streams.length) { throw new Error('# of streams dont match # grid els'); }
+  if (grid.length !== streams.length) {
+    throw new Error('# of streams dont match # grid els');
+  }
 
   grid.forEach((grid, idx) => {
     const stream = streams[idx];
@@ -85,7 +89,10 @@ function setStreamSizes(grid: any[], streams: any[]) {
 }
 
 function setGrid() {
-  const grid = getGrid(numberOfStreams, { w: window.innerWidth, h: window.innerHeight });
+  const grid = getGrid(numberOfStreams, {
+    w: window.innerWidth,
+    h: window.innerHeight,
+  });
   setStreamSizes(grid, streams);
 }
 
